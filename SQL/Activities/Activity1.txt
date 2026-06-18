@@ -1,0 +1,77 @@
+--Activity1
+
+CREATE TABLE salesman (
+    salesman_id INT NOT NULL,
+    salesman_name VARCHAR2(20),
+    salesman_city VARCHAR2(20),
+    commission INT
+);
+
+--Activity2
+
+
+INSERT ALL
+  INTO salesman (salesman_id, salesman_name, salesman_city, commission) VALUES (5001, 'James Hoog', 'New York', 15)
+  INTO salesman (salesman_id, salesman_name, salesman_city, commission) VALUES (5002, 'Nail Knite', 'Paris', 13)
+  INTO salesman (salesman_id, salesman_name, salesman_city, commission) VALUES (5005, 'Pit Alex', 'London', 11)
+  INTO salesman (salesman_id, salesman_name, salesman_city, commission) VALUES (5006, 'McLyon', 'Paris', 14)
+  INTO salesman (salesman_id, salesman_name, salesman_city, commission) VALUES (5007, 'Paul Adam', 'Rome', 13)
+  INTO salesman (salesman_id, salesman_name, salesman_city, commission) VALUES (5003, 'Lauson Hen', 'San Jose', 12)
+SELECT * FROM dual;
+
+SELECT * FROM salesman;
+
+
+--Activity3
+
+SELECT salesman_id, salesman_city
+FROM salesman;
+
+SELECT *
+FROM salesman
+WHERE salesman_city = 'Paris';
+
+
+SELECT salesman_id, commission
+FROM salesman
+WHERE salesman_name = 'Paul Adam';
+
+--Activity4
+
+ALTER TABLE salesman
+ADD grade INT;
+
+UPDATE salesman
+SET grade = 100;
+
+SELECT * FROM salesman;
+
+--ACTIVITY5
+
+UPDATE salesman
+SET grade = 200
+WHERE salesman_city = 'Rome';
+
+UPDATE salesman
+SET grade = 300
+WHERE salesman_name = 'James Hoog';
+
+UPDATE salesman
+SET salesman_name = 'Pierre'
+WHERE salesman_name = 'McLyon';
+
+SELECT * FROM salesman;
+
+
+--Activity6
+
+SELECT DISTINCT salesman_id FROM orders;
+
+SELECT order_no FROM orders ORDER BY order_date ASC;
+
+SELECT order_no FROM orders ORDER BY purchase_amount DESC;
+
+SELECT * FROM orders WHERE purchase_amount < 500;
+
+SELECT * FROM orders WHERE purchase_amount BETWEEN 1000 AND 2000;
+
