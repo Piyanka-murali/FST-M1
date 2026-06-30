@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="OrangeHRM Suite">
+
+    <test name="OrangeHRM Activities">
+
+        <classes>
+
+            <class name="com.seleniumProject.Activity1_VerifyTitle"/>
+            <class name="com.seleniumProject.Activity2_HeaderImage"/>
+            <class name="com.seleniumProject.Activity3_Login"/>
+            <class name="com.seleniumProject.Activity4_AddEmployee"/>
+            <class name="com.seleniumProject.Activity5_EditUserInfo"/>
+            <class name="com.seleniumProject.Activity6_Directory"/>
+            <class name="com.seleniumProject.Activity7_Qualifications"/>
+            <class name="com.seleniumProject.Activity8_ApplyLeave"/>
+            <class name="com.seleniumProject.Activity9_EmergencyContacts"/>
+
+        </classes>
+
+    </test>
+
+</suite>
