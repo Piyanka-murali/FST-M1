@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    xmlns:con="http://eviware.com/soapui/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="GitHub_API_Project">
+
+    <con:settings/>
+
+    <!-- Create SSH Key -->
+
+    <con:testStep type="restrequest" name="CreateKey">
+
+        <con:config service="https://api.github.com"
+                    resourcePath="/user/keys"
+                    methodName="POST"
+                    xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                name="CreateKey"
+                mediaType="application/json">
+
+                <con:endpoint>
+                    https://api.github.com
+                </con:endpoint>
+
+                <con:request>
+{
+  "title": "TestKey",
+  "key": "YOUR_PUBLIC_SSH_KEY"
+}
+                </con:request>
+
+                <con:assertion
+                    type="Valid HTTP Status Codes"
+                    name="Valid HTTP Status Codes">
+
+                    <con:configuration>
+                        <codes>201</codes>
+                    </con:configuration>
+
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- Get SSH Key -->
+
+    <con:testStep type="restrequest" name="GetKey">
+
+        <con:config service="https://api.github.com"
+                    resourcePath="/user/keys/{keyId}"
+                    methodName="GET"
+                    xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                name="GetKey"
+                mediaType="application/json">
+
+                <con:endpoint>
+                    https://api.github.com
+                </con:endpoint>
+
+                <con:parameters>
+                    <con:entry
+                        key="keyId"
+                        value="${CreateKey#Response#$['id']}"/>
+                </con:parameters>
+
+                <con:assertion
+                    type="Valid HTTP Status Codes"
+                    name="Valid HTTP Status Codes">
+
+                    <con:configuration>
+                        <codes>200</codes>
+                    </con:configuration>
+
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- Delete SSH Key -->
+
+    <con:testStep type="restrequest" name="DeleteKey">
+
+        <con:config service="https://api.github.com"
+                    resourcePath="/user/keys/{keyId}"
+                    methodName="DELETE"
+                    xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                name="DeleteKey"
+                mediaType="application/json">
+
+                <con:endpoint>
+                    https://api.github.com
+                </con:endpoint>
+
+                <con:parameters>
+                    <con:entry
+                        key="keyId"
+                        value="${CreateKey#Response#$['id']}"/>
+                </con:parameters>
+
+                <con:assertion
+                    type="Valid HTTP Status Codes"
+                    name="Valid HTTP Status Codes">
+
+                    <con:configuration>
+                        <codes>204</codes>
+                    </con:configuration>
+
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+</con:testCase>
