@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    xmlns:con="http://eviware.com/soapui/config"
+    name="DataDrivenTestExcel">
+
+    <!-- Excel DataSource -->
+
+    <con:testStep type="DataSource" name="ExcelDataSource">
+
+        <con:config dataSourceType="Excel">
+
+            IPAddresses.xlsx
+
+            <worksheet>Sheet1</worksheet>
+
+            <property>Name=IP Address</property>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- REST Request -->
+
+    <con:testStep type="restrequest" name="IPWhoisRequest">
+
+        <con:config
+            service="http://ipwhois.app"
+            resourcePath="/json/${ExcelDataSource#IP Address}">
+
+            <con:restRequest
+                name="IPLookup"
+                mediaType="application/json">
+
+                <con:endpoint>
+                    http://ipwhois.app
+                </con:endpoint>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- DataSource Loop -->
+
+    <con:testStep type="DataSourceLoop" name="DataLoop">
+
+        <con:config
+            dataSourceStep="ExcelDataSource"
+            targetStep="IPWhoisRequest"/>
+
+    </con:testStep>
+
+</con:testCase>

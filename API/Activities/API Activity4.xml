@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    xmlns:con="http://eviware.com/soapui/config"
+    name="DataDrivenTest_TextFile">
+
+    <!-- Data Source -->
+    <con:testStep type="DataSource" name="TextDataSource">
+        <con:config dataSourceType="File">
+
+            <property>Name=IPAddress</property>
+
+            iplist.txt
+
+        </con:config>
+    </con:testStep>
+
+    <!-- REST Request -->
+    <con:testStep type="restrequest" name="IPWhoIsRequest">
+
+        <con:config
+            service="http://ipwhois.app"
+            resourcePath="/json/${TextDataSource#IPAddress}">
+
+            <con:restRequest
+                name="IPLookup"
+                mediaType="application/json">
+
+                <con:endpoint>
+                    http://ipwhois.app
+                </con:endpoint>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- Loop -->
+    <con:testStep type="DataSourceLoop" name="LoopData">
+
+        <con:config
+            dataSourceStep="TextDataSource"
+            targetStep="IPWhoIsRequest"/>
+
+    </con:testStep>
+
+</con:testCase>

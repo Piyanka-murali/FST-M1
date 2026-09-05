@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    xmlns:con="http://eviware.com/soapui/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="XPathAssertionActivity">
+
+    <con:testStep type="request" name="AddNumbers">
+
+        <con:config xsi:type="con:RequestStep">
+
+            <con:request name="Add">
+
+                <![CDATA[
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:tem="http://tempuri.org/">
+   <soap:Body>
+      <tem:Add>
+         <tem:intA>10</tem:intA>
+         <tem:intB>20</tem:intB>
+      </tem:Add>
+   </soap:Body>
+</soap:Envelope>
+                ]]>
+
+            </con:request>
+
+            <con:assertion
+                type="XPath Match"
+                name="XPath Match Assertion">
+
+                <con:configuration>
+
+                    <namespaces>
+                        <namespace
+                            prefix="ns"
+                            uri="http://tempuri.org/" />
+                    </namespaces>
+
+                    <xpath>//ns:AddResult</xpath>
+
+                    <expectedContent>30</expectedContent>
+
+                </con:configuration>
+
+            </con:assertion>
+
+        </con:config>
+
+    </con:testStep>
+
+</con:testCase>

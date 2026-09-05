@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    id="1276ee82-4c66-42cf-95ed-1da8db3840ef"
+    discardOkResults="false"
+    failOnError="false"
+    failTestCaseOnErrors="true"
+    keepSession="false"
+    name="User"
+    searchProperties="true"
+    timeout="0"
+    xmlns:con="http://eviware.com/soapui/config">
+
+    <con:settings/>
+
+    <!-- Create User -->
+    <con:testStep type="restrequest" name="CreateUser">
+        ...
+    </con:testStep>
+
+    <!-- Login -->
+    <con:testStep type="restrequest" name="Login">
+        ...
+    </con:testStep>
+
+    <!-- Get User -->
+    <con:testStep type="restrequest" name="GetUser">
+        ...
+    </con:testStep>
+
+    <!-- Logout -->
+    <con:testStep type="restrequest" name="Logout">
+        ...
+    </con:testStep>
+
+    <!-- Delete User -->
+    <con:testStep type="restrequest" name="DeleteUser">
+        ...
+    </con:testStep>
+
+</con:testCase>

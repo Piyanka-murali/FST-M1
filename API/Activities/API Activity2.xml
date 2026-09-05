@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    xmlns:con="http://eviware.com/soapui/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="JSONAssertionActivity">
+
+    <con:testStep type="restrequest" name="FindPetByStatus">
+
+        <con:config
+            service="https://petstore.swagger.io"
+            resourcePath="/v2/pet/findByStatus"
+            methodName="GET"
+            xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                name="FindPetByStatus"
+                mediaType="application/json">
+
+                <con:endpoint>https://petstore.swagger.io</con:endpoint>
+
+                <con:parameters>
+                    <con:entry key="status" value="sold"/>
+                </con:parameters>
+
+                <con:assertion
+                    type="JsonPath Match"
+                    name="JSONPath Match Assertion">
+
+                    <con:configuration>
+                        <path>$[0].status</path>
+                        <expectedContent>sold</expectedContent>
+                    </con:configuration>
+
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+</con:testCase>

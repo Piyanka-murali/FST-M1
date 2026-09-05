@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    xmlns:con="http://eviware.com/soapui/config"
+    name="JDBCConnectionActivity">
+
+    <!-- Data Source -->
+
+    <con:testStep type="DataSource" name="IPAddressSource">
+
+        <con:config dataSourceType="Grid">
+
+            <property>Name=IP</property>
+
+            <row>
+                <value>164.172.55.44</value>
+            </row>
+
+            <row>
+                <value>149.147.244.212</value>
+            </row>
+
+            <row>
+                <value>94.127.62.254</value>
+            </row>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- REST Request -->
+
+    <con:testStep type="restrequest" name="IPWhoisRequest">
+
+        <con:config
+            service="http://ipwhois.app"
+            resourcePath="/json/${IPAddressSource#IP}">
+
+            <con:restRequest
+                name="IPRequest"
+                mediaType="application/json">
+
+                <con:endpoint>http://ipwhois.app</con:endpoint>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- JDBC Request -->
+
+    <con:testStep type="jdbc" name="InsertIntoDatabase">
+
+        <con:config>
+
+            <connectionString>
+                jdbc:mysql://localhost:3306/ipdatabase
+            </connectionString>
+
+            <driver>
+                com.mysql.cj.jdbc.Driver
+            </driver>
+
+            <query>
+
+                INSERT INTO IP_DETAILS
+                (IP_ADDRESS)
+                VALUES
+                ('${IPAddressSource#IP}')
+
+            </query>
+
+        </con:config>
+
+    </con:testStep>
+
+    <!-- Data Loop -->
+
+    <con:testStep type="DataSourceLoop" name="LoopIPs">
+
+        <con:config
+            dataSourceStep="IPAddressSource"
+            targetStep="IPWhoisRequest"/>
+
+    </con:testStep>
+
+</con:testCase>
