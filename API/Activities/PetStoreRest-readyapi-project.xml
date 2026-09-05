@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase
+    xmlns:con="http://eviware.com/soapui/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="Activity1">
+
+    <con:settings/>
+
+    <con:testStep type="restrequest" name="CreateUser">
+
+        <con:config
+                service="https://petstore.swagger.io"
+                resourcePath="/v2/user"
+                methodName="POST"
+                xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                    name="CreateUser"
+                    mediaType="application/json">
+
+                <con:endpoint>https://petstore.swagger.io</con:endpoint>
+
+                <con:request>
+{
+    "id": 2001,
+    "username": "johndon",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@doe.com",
+    "password": "johndon",
+    "phone": "234567890",
+    "userStatus": 0
+}
+                </con:request>
+
+                <con:assertion
+                        type="Valid HTTP Status Codes"
+                        name="HTTP 200">
+                    <con:configuration>
+                        <codes>200</codes>
+                    </con:configuration>
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <con:testStep type="restrequest" name="Login">
+
+        <con:config
+                service="https://petstore.swagger.io"
+                resourcePath="/v2/user/login"
+                methodName="GET"
+                xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                    name="Login"
+                    mediaType="application/json">
+
+                <con:endpoint>https://petstore.swagger.io</con:endpoint>
+
+                <con:parameters>
+                    <con:entry key="username" value="johndon"/>
+                    <con:entry key="password" value="johndon"/>
+                </con:parameters>
+
+                <con:assertion
+                        type="Valid HTTP Status Codes"
+                        name="HTTP 200">
+                    <con:configuration>
+                        <codes>200</codes>
+                    </con:configuration>
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <con:testStep type="restrequest" name="GetUser">
+
+        <con:config
+                service="https://petstore.swagger.io"
+                resourcePath="/v2/user/{username}"
+                methodName="GET"
+                xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                    name="GetUser"
+                    mediaType="application/json">
+
+                <con:endpoint>https://petstore.swagger.io</con:endpoint>
+
+                <con:parameters>
+                    <con:entry key="username" value="johndon"/>
+                </con:parameters>
+
+                <con:assertion
+                        type="Valid HTTP Status Codes"
+                        name="HTTP 200">
+                    <con:configuration>
+                        <codes>200</codes>
+                    </con:configuration>
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <con:testStep type="restrequest" name="Logout">
+
+        <con:config
+                service="https://petstore.swagger.io"
+                resourcePath="/v2/user/logout"
+                methodName="GET"
+                xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                    name="Logout"
+                    mediaType="application/json">
+
+                <con:endpoint>https://petstore.swagger.io</con:endpoint>
+
+                <con:assertion
+                        type="Valid HTTP Status Codes"
+                        name="HTTP 200">
+                    <con:configuration>
+                        <codes>200</codes>
+                    </con:configuration>
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+    <con:testStep type="restrequest" name="DeleteUser">
+
+        <con:config
+                service="https://petstore.swagger.io"
+                resourcePath="/v2/user/{username}"
+                methodName="DELETE"
+                xsi:type="con:RestRequestStep">
+
+            <con:restRequest
+                    name="DeleteUser"
+                    mediaType="application/json">
+
+                <con:endpoint>https://petstore.swagger.io</con:endpoint>
+
+                <con:parameters>
+                    <con:entry key="username" value="johndon"/>
+                </con:parameters>
+
+                <con:assertion
+                        type="Valid HTTP Status Codes"
+                        name="HTTP 200">
+                    <con:configuration>
+                        <codes>200</codes>
+                    </con:configuration>
+                </con:assertion>
+
+            </con:restRequest>
+
+        </con:config>
+
+    </con:testStep>
+
+</con:testCase>
